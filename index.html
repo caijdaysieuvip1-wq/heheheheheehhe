@@ -2,35 +2,39 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy New Year</title>
+
   <style>
-    html, body {
+    * {
       margin: 0;
       padding: 0;
-      height: 100%;
+      box-sizing: border-box;
     }
 
     body {
-      /* 👉 DÁN LINK ẢNH NỀN CỦA BẠN VÀO GIỮA DẤU "" */
+      width: 100vw;
+      height: 100svh; /* chuẩn mobile */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       background-image: url("anh.jng");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     h1 {
       color: white;
-      font-size: 48px;
+      font-size: clamp(24px, 6vw, 48px);
       font-family: Arial, Helvetica, sans-serif;
       letter-spacing: 3px;
-      margin: 0;
+      text-align: center;
     }
   </style>
 </head>
+
 <body>
   <h1>HAPPY NEW YEAR 2026</h1>
 </body>
