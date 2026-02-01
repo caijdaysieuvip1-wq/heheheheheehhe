@@ -29,6 +29,7 @@
       justify-content: center;
       color: white;
       text-align: center;
+      position: relative;
     }
 
     .rotate .text {
@@ -39,8 +40,8 @@
       opacity: 0.9;
     }
 
-    .rotate img {
-      width: 120px;
+    .rotate video {
+      width: 160px;          /* chỉnh to/nhỏ ở đây */
       opacity: 0.9;
     }
 
@@ -82,7 +83,10 @@
   <!-- MÀN HÌNH XOAY (DỌC) -->
   <div class="rotate">
     <div class="text">Vui lòng xoay ngang màn hình</div>
-    <img src="cute.jng" alt="Rotate phone">
+
+    <video autoplay loop muted playsinline>
+      <source src="cute.mp4" type="video/mp4">
+    </video>
   </div>
 
   <!-- TRANG TẾT (NGANG) -->
