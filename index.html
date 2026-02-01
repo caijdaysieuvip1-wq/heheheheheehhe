@@ -15,22 +15,26 @@
     body {
       width: 100vw;
       height: 100svh; /* chuẩn mobile */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
       background-image: url("anh.jng");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
     }
 
     h1 {
+      position: absolute;
+      top: 50%;                 /* 👈 CHUẨN VỊ TRÍ CHO ẢNH NÀY */
+      left: 50%;
+      transform: translate(-50%, -50%);
+
       color: white;
-      font-size: clamp(24px, 6vw, 48px);
+      font-size: clamp(22px, 5vw, 44px);
       font-family: Arial, Helvetica, sans-serif;
       letter-spacing: 3px;
       text-align: center;
+      white-space: nowrap;
     }
   </style>
 </head>
