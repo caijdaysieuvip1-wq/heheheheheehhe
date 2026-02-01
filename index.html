@@ -18,25 +18,26 @@
     }
 
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background-color: #c40000;
 
       background-image: url("anh.jng");
       background-repeat: no-repeat;
       background-position: center;
-      background-size: contain;   /* THU NHỎ ẢNH – KHÔNG BỊ CẮT */
-      background-color: #c40000;  /* nền đỏ khi ảnh không phủ kín */
+      background-size: contain;   /* 👈 CHUẨN CHO ẢNH NGANG */
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       font-family: Arial, Helvetica, sans-serif;
     }
 
     h1 {
       color: white;
-      font-size: 22px;
+      font-size: clamp(20px, 4vw, 40px);
       letter-spacing: 3px;
       text-align: center;
-      margin-top: 40vh; /* đẩy chữ xuống giống ảnh mẫu */
+      margin-top: 10vh; /* chữ hơi thấp giống banner */
     }
   </style>
 </head>
