@@ -1,21 +1,48 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Web Tết</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            /* Tự động lấy file anh.jng làm nền */
-            background: url('anh.jng') no-repeat center center fixed;
-            background-size: cover;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: black;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 450px;        /* 👈 khóa giống màn hình điện thoại */
+    margin: 0 auto;
+    aspect-ratio: 9 / 16;   /* 👈 KHÓA TỈ LỆ ẢNH */
+    background-image: url("anh.jng");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  .text {
+    position: absolute;
+    top: 52%;               /* 👈 vị trí giống ảnh mẫu */
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 22px;
+    letter-spacing: 3px;
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+  }
+</style>
 </head>
+
 <body>
-    </body>
+  <div class="wrap">
+    <div class="text">HAPPY NEW YEAR 2026</div>
+  </div>
+</body>
 </html>
