@@ -17,40 +17,33 @@
       height: 100%;
       overflow: hidden;
       font-family: Arial, Helvetica, sans-serif;
-      background: black;
     }
 
     /* ===== MÀN HÌNH XOAY (DỌC) ===== */
     .rotate {
       position: fixed;
       inset: 0;
-      background: black;
+      background: #000;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       color: white;
-      z-index: 10;
       text-align: center;
+      z-index: 10;
     }
 
     .rotate video {
-      width: 160px;
+      width: 180px;
+      max-width: 60%;
       margin-top: 20px;
-      opacity: 0.9;
     }
 
-    .rotate .text {
-      font-size: 18px;
-      letter-spacing: 1px;
-      opacity: 0.9;
-    }
-
-    /* ===== TRANG TẾT (NGANG) ===== */
+    /* ===== TRANG CHÍNH (NGANG) ===== */
     .main {
+      display: none;
       position: fixed;
       inset: 0;
-      display: none;
       overflow: hidden;
     }
 
@@ -59,41 +52,27 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover; /* KHÔNG LỒI, KHÔNG VIỀN */
+      object-fit: cover;
     }
 
     .main h1 {
       position: relative;
       z-index: 2;
       color: white;
-      font-size: clamp(22px, 4vw, 48px);
-      letter-spacing: 4px;
-      text-shadow: 0 4px 15px rgba(0,0,0,0.6);
-    }
-
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.15);
-      z-index: 1;
-    }
-
-    .center {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2;
+      letter-spacing: 3px;
+      font-size: clamp(22px, 4vw, 42px);
+      text-shadow: 0 0 15px rgba(0,0,0,0.6);
     }
 
     /* ===== XOAY NGANG ===== */
-    @media (orientation: landscape) {
+    @media screen and (orientation: landscape) {
       .rotate {
         display: none;
       }
       .main {
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   </style>
@@ -103,10 +82,25 @@
 
   <!-- MÀN HÌNH DỌC -->
   <div class="rotate">
-    <div class="text">Vui lòng xoay ngang màn hình</div>
-    <video src="cute.mp4" autoplay muted loop playsinline></video>
+    <div>Vui lòng xoay ngang màn hình</div>
+    <video src="cute.mp4" autoplay loop muted playsinline></video>
   </div>
 
+  <!-- TRANG NGANG -->
+  <div class="main">
+    <video
+      src="video_20260202_212905_edit.mp4"
+      autoplay
+      loop
+      muted
+      playsinline>
+    </video>
+
+    <h1>HAPPY NEW YEAR 2026</h1>
+  </div>
+
+</body>
+</html>
   <!-- MÀN HÌNH NGANG -->
   <div class="main">
     <video src="video_20260202_212905_edit.mp4" autoplay loop playsinline></video>
