@@ -14,10 +14,11 @@ html,body{
   font-family:'Times New Roman', serif;
 }
 
-/* ===== VIDEO DỌC ===== */
+/* VIDEO XOAY DỌC */
 .rotate{
   position:fixed;
   inset:0;
+  background:black;
   display:flex;
   z-index:10;
 }
@@ -27,12 +28,11 @@ html,body{
   object-fit:cover;
 }
 
-/* ===== VIDEO NỀN ===== */
+/* VIDEO NGANG */
 .main{
   position:fixed;
   inset:0;
   display:none;
-  z-index:1;
 }
 .main video{
   width:100%;
@@ -40,10 +40,10 @@ html,body{
   object-fit:cover;
 }
 
-/* ===== CHỮ ===== */
+/* CHỮ */
 .text-box{
   position:absolute;
-  top:28%;
+  top:25%;
   left:50%;
   transform:translateX(-50%);
   width:100%;
@@ -51,62 +51,125 @@ html,body{
   justify-content:center;
   pointer-events:none;
 }
-
 .wave{
-  font-size:clamp(30px,6vw,64px);
+  font-size:clamp(28px,6vw,60px);
   font-weight:bold;
   color:#fff;
   display:flex;
   gap:4px;
-  white-space:nowrap;
   text-shadow:
     0 0 6px rgba(255,255,255,.7),
-    0 0 20px rgba(255,215,0,.8);
+    0 0 20px rgba(255,215,0,.7);
 }
 .wave span{
-  display:inline-block;
   animation:wave 1.6s ease-in-out infinite;
+  display:inline-block;
 }
 @keyframes wave{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-18px)}
 }
 
-/* ===== NÚT ===== */
-.btn{
+/* NÚT */
+.controls{
   position:absolute;
-  right:16px;
-  bottom:16px;
-  z-index:5;
+  bottom:6%;
+  right:6%;
+  z-index:20;
+}
+.btn{
+  background:rgba(0,0,0,.6);
+  color:#fff;
+  border-radius:14px;
+  padding:12px 18px;
+  font-size:20px;
   border:none;
   cursor:pointer;
-  box-shadow:0 4px 12px rgba(0,0,0,.3);
+  backdrop-filter:blur(6px);
 }
+#continueBtn{display:none}
 
-/* nút bật nhạc */
-.music-btn{
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  font-size:26px;
-  background:rgba(255,255,255,.9);
-}
-
-/* nút tiếp tục */
-.continue-btn{
-  display:none;
-  padding:12px 18px;
-  border-radius:14px;
-  font-size:18px;
-  background:rgba(255,255,255,.9);
-  font-weight:bold;
-}
-
-/* ===== XOAY MÀN HÌNH ===== */
-@media (orientation: landscape){
+/* XOAY NGANG */
+@media (orientation:landscape){
   .rotate{display:none}
   .main{display:block}
 }
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO DỌC -->
+<div class="rotate">
+  <video autoplay muted loop playsinline>
+    <source src="cute.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- VIDEO NGANG -->
+<div class="main">
+  <video autoplay muted loop playsinline>
+    <source src="BeautyPlus-video-enhancer-preview-1770091865238.jpg.mp4" type="video/mp4">
+  </video>
+
+  <div class="text-box">
+    <div class="wave">
+      <span style="animation-delay:0s">H</span>
+      <span style="animation-delay:.1s">A</span>
+      <span style="animation-delay:.2s">P</span>
+      <span style="animation-delay:.3s">P</span>
+      <span style="animation-delay:.4s">Y</span>
+      <span style="animation-delay:.5s">&nbsp;</span>
+      <span style="animation-delay:.6s">N</span>
+      <span style="animation-delay:.7s">E</span>
+      <span style="animation-delay:.8s">W</span>
+      <span style="animation-delay:.9s">&nbsp;</span>
+      <span style="animation-delay:1s">Y</span>
+      <span style="animation-delay:1.1s">E</span>
+      <span style="animation-delay:1.2s">A</span>
+      <span style="animation-delay:1.3s">R</span>
+      <span style="animation-delay:1.4s">&nbsp;</span>
+      <span style="animation-delay:1.5s">2</span>
+      <span style="animation-delay:1.6s">0</span>
+      <span style="animation-delay:1.7s">2</span>
+      <span style="animation-delay:1.8s">6</span>
+    </div>
+  </div>
+
+  <!-- NÚT -->
+  <div class="controls">
+    <button id="musicBtn" class="btn">☘️ Bật nhạc</button>
+    <button id="continueBtn" class="btn">🧧 Tiếp tục</button>
+  </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="bgMusic" src="audio.mp3" loop></audio>
+
+<script>
+const musicBtn = document.getElementById('musicBtn');
+const continueBtn = document.getElementById('continueBtn');
+const music = document.getElementById('bgMusic');
+
+// load lại trang
+window.addEventListener('load', ()=>{
+  if(localStorage.getItem('musicStarted') === 'yes'){
+    musicBtn.style.display='none';
+    continueBtn.style.display='block';
+  }
+});
+
+// bật nhạc lần đầu
+musicBtn.onclick = ()=>{
+  music.play();
+  localStorage.setItem('musicStarted','yes');
+  musicBtn.style.display='none';
+  continueBtn.style.display='block';
+};
+</script>
+
+</body>
+</html>}
 </style>
 </head>
 
