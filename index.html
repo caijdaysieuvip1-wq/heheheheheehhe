@@ -14,7 +14,7 @@ html,body{
   font-family:Arial, Helvetica, sans-serif;
 }
 
-/* ===== MÀN DỌC ===== */
+/* ===== DỌC ===== */
 .rotate{
   position:fixed;
   inset:0;
@@ -32,7 +32,7 @@ html,body{
   margin-top:20px;
 }
 
-/* ===== MÀN NGANG ===== */
+/* ===== NGANG ===== */
 .main{
   position:fixed;
   inset:0;
@@ -82,31 +82,47 @@ html,body{
 </div>
 
 <script>
-function forceInfinite(video){
+const bgVideo = document.getElementById('bgVideo');
+const rotateVideo = document.getElementById('rotateVideo');
+
+function playSafe(video){
   if(!video) return;
-
-  const play = () => {
-    video.currentTime = 0;
-    video.play().catch(()=>{});
-  };
-
-  // chạy lần đầu
-  play();
-
-  // hết → chạy lại
-  video.addEventListener('ended', play);
-
-  // mobile pause ngầm
-  setInterval(()=>{
-    if(video.paused) play();
-  },1000);
-
-  // tương tác người dùng
-  document.body.addEventListener('touchstart', play, {once:true});
-  document.body.addEventListener('click', play, {once:true});
+  video.currentTime = 0;
+  video.play().catch(()=>{});
 }
 
-window.addEventListener('load',()=>{
+function checkOrientation(){
+  if(window.matchMedia("(orientation: portrait)").matches){
+    // đang dọc
+    bgVideo.pause();
+    playSafe(rotateVideo);
+  }else{
+    // đang ngang
+    rotateVideo.pause();
+    playSafe(bgVideo);
+  }
+}
+
+// khi load
+window.addEventListener('load', checkOrientation);
+
+// khi xoay máy
+window.addEventListener('orientationchange', () => {
+  setTimeout(checkOrientation, 300);
+});
+
+// tương tác người dùng (mobile bắt buộc)
+document.body.addEventListener('touchstart', checkOrientation, { once:true });
+document.body.addEventListener('click', checkOrientation, { once:true });
+
+// ép loop cho cả 2
+[bgVideo, rotateVideo].forEach(v=>{
+  v.addEventListener('ended', ()=>playSafe(v));
+});
+</script>
+
+</body>
+</html>window.addEventListener('load',()=>{
   forceInfinite(document.getElementById('bgVideo'));
   forceInfinite(document.getElementById('rotateVideo'));
 });
