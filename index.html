@@ -6,12 +6,7 @@
 <title>Happy New Year 2026</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
 html,body{
   width:100%;
   height:100%;
@@ -32,7 +27,6 @@ html,body{
   text-align:center;
   z-index:10;
 }
-
 .rotate video{
   width:180px;
   margin-top:20px;
@@ -46,7 +40,6 @@ html,body{
   justify-content:center;
   align-items:center;
 }
-
 .bg-video{
   position:absolute;
   inset:0;
@@ -55,18 +48,17 @@ html,body{
   object-fit:cover;
   z-index:-1;
 }
-
 .main h1{
   color:#fff;
   font-size:clamp(22px,4vw,42px);
   letter-spacing:3px;
-  text-shadow:0 0 15px rgba(0,0,0,0.7);
+  text-shadow:0 0 15px rgba(0,0,0,.7);
 }
 
 /* ===== XOAY NGANG ===== */
 @media (orientation: landscape){
-  .rotate{display:none;}
-  .main{display:flex;}
+  .rotate{display:none}
+  .main{display:flex}
 }
 </style>
 </head>
@@ -81,50 +73,40 @@ html,body{
   </video>
 </div>
 
-<!-- TRANG TẾT -->
+<!-- TRANG NGANG -->
 <div class="main">
   <video id="bgVideo" class="bg-video" muted playsinline preload="auto">
     <source src="video_20260202_212905_edit.mp4" type="video/mp4">
   </video>
-
   <h1>HAPPY NEW YEAR 2026</h1>
 </div>
 
 <script>
-function forceInfiniteLoop(video){
-  if(!video) return;
+window.addEventListener('load', () => {
+  const bgVideo = document.getElementById('bgVideo');
 
-  const playAgain = () => {
-    video.currentTime = 0;
-    video.play().catch(()=>{});
+  if (!bgVideo) return;
+
+  const playLoop = () => {
+    bgVideo.currentTime = 0;
+    bgVideo.play().catch(()=>{});
   };
 
   // chạy lần đầu
-  playAgain();
+  playLoop();
 
-  // hết video là chạy lại
-  video.addEventListener('ended', playAgain);
+  // hết là chạy lại
+  bgVideo.addEventListener('ended', playLoop);
 
-  // nếu bị pause ngầm (mobile)
+  // Android hay pause ngầm → ép chạy lại
   setInterval(() => {
-    if (video.paused) {
-      playAgain();
-    }
+    if (bgVideo.paused) playLoop();
   }, 1000);
 
   // cần tương tác người dùng
-  document.body.addEventListener('touchstart', playAgain, { once:true });
-  document.body.addEventListener('click', playAgain, { once:true });
-}
-
-window.addEventListener('load', () => {
-  forceInfiniteLoop(document.getElementById('bgVideo'));
-  forceInfiniteLoop(document.getElementById('rotateVideo'));
+  document.body.addEventListener('touchstart', playLoop, { once:true });
+  document.body.addEventListener('click', playLoop, { once:true });
 });
-</script>
-
-</body>
-</html>});
 </script>
 
 </body>
