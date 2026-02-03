@@ -6,7 +6,12 @@
 <title>Happy New Year 2026</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
 html,body{
   width:100%;
   height:100%;
@@ -14,11 +19,12 @@ html,body{
   font-family:'Times New Roman', serif;
 }
 
-/* ===== VIDEO XOAY (DỌC) ===== */
+/* ===== VIDEO XOAY MÀN HÌNH (DỌC) ===== */
 .rotate{
   position:fixed;
   inset:0;
   background:black;
+  display:flex;
   z-index:10;
 }
 .rotate video{
@@ -42,40 +48,28 @@ html,body{
   object-fit:cover;
 }
 
-/* ===== THANH ĐEN (CHỈ LÀ ĐẾ CHỮ) ===== */
-.banner{
-  position:absolute;
-  top:45%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:80%;
-  max-width:900px;
-  height:70px;
-  background:rgba(0,0,0,0.7);
-  border-radius:40px;
-  z-index:2;
-}
-
-/* ===== CHỮ ===== */
+/* ===== CHỮ HAPPY NEW YEAR ===== */
 .text-box{
   position:absolute;
-  top:45%;
+  top:42%; /* canh giữa, tránh che trang trí */
   left:50%;
   transform:translate(-50%,-50%);
-  z-index:3;
+  width:100%;
+  display:flex;
+  justify-content:center;
   pointer-events:none;
 }
 
 .wave{
+  font-size:clamp(28px,6vw,60px);
+  font-weight:bold;
+  color:#fff;
   display:flex;
   gap:4px;
-  font-size:clamp(26px,5.5vw,58px);
-  font-weight:bold;
-  color:white;
   white-space:nowrap;
   text-shadow:
-    0 0 8px rgba(255,255,255,.8),
-    0 0 20px rgba(255,215,0,.8);
+    0 0 6px rgba(255,255,255,.7),
+    0 0 18px rgba(255,215,0,.6);
 }
 
 .wave span{
@@ -89,7 +83,7 @@ html,body{
 }
 
 /* ===== XOAY NGANG ===== */
-@media (orientation: landscape){
+@media (orientation:landscape){
   .rotate{display:none}
   .main{display:block}
 }
@@ -98,7 +92,7 @@ html,body{
 
 <body>
 
-<!-- VIDEO XOAY (KHÔNG CHỮ) -->
+<!-- VIDEO XOAY MÀN HÌNH (KHÔNG CHỮ) -->
 <div class="rotate">
   <video autoplay muted loop playsinline>
     <source src="cute.mp4" type="video/mp4">
@@ -107,6 +101,54 @@ html,body{
 
 <!-- VIDEO NỀN (CÓ CHỮ + NHẠC) -->
 <div class="main">
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="BeautyPlus-video-enhancer-preview-1770091865238.jpg.mp4" type="video/mp4">
+  </video>
+
+  <!-- NHẠC TÁCH RIÊNG -->
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- CHỮ -->
+  <div class="text-box">
+    <div class="wave">
+      <span style="animation-delay:0s">H</span>
+      <span style="animation-delay:.1s">A</span>
+      <span style="animation-delay:.2s">P</span>
+      <span style="animation-delay:.3s">P</span>
+      <span style="animation-delay:.4s">Y</span>
+      <span style="animation-delay:.5s">&nbsp;</span>
+      <span style="animation-delay:.6s">N</span>
+      <span style="animation-delay:.7s">E</span>
+      <span style="animation-delay:.8s">W</span>
+      <span style="animation-delay:.9s">&nbsp;</span>
+      <span style="animation-delay:1s">Y</span>
+      <span style="animation-delay:1.1s">E</span>
+      <span style="animation-delay:1.2s">A</span>
+      <span style="animation-delay:1.3s">R</span>
+      <span style="animation-delay:1.4s">&nbsp;</span>
+      <span style="animation-delay:1.5s">2</span>
+      <span style="animation-delay:1.6s">0</span>
+      <span style="animation-delay:1.7s">2</span>
+      <span style="animation-delay:1.8s">6</span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Bật nhạc sau khi người dùng chạm (bắt buộc trên mobile) */
+function startMusic(){
+  const music = document.getElementById('bgMusic');
+  music.play().catch(()=>{});
+}
+
+document.body.addEventListener('click', startMusic, { once:true });
+document.body.addEventListener('touchstart', startMusic, { once:true });
+</script>
+
+</body>
+</html><div class="main">
 
   <video autoplay muted loop playsinline>
     <source src="BeautyPlus-video-enhancer-preview-1770091865238.jpg.mp4" type="video/mp4">
