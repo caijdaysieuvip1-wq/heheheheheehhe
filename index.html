@@ -14,7 +14,7 @@ html,body{
   font-family:'Times New Roman', serif;
 }
 
-/* VIDEO XOAY DỌC */
+/* VIDEO DỌC */
 .rotate{
   position:fixed;
   inset:0;
@@ -33,6 +33,7 @@ html,body{
   position:fixed;
   inset:0;
   display:none;
+  z-index:5;
 }
 .main video{
   width:100%;
@@ -63,7 +64,6 @@ html,body{
 }
 .wave span{
   animation:wave 1.6s ease-in-out infinite;
-  display:inline-block;
 }
 @keyframes wave{
   0%,100%{transform:translateY(0)}
@@ -75,7 +75,7 @@ html,body{
   position:absolute;
   bottom:6%;
   right:6%;
-  z-index:20;
+  z-index:30;
 }
 .btn{
   background:rgba(0,0,0,.6);
@@ -85,28 +85,83 @@ html,body{
   font-size:20px;
   border:none;
   cursor:pointer;
-  backdrop-filter:blur(6px);
 }
 #continueBtn{display:none}
-
-/* XOAY NGANG */
-@media (orientation:landscape){
-  .rotate{display:none}
-  .main{display:block}
-}
 </style>
 </head>
 
 <body>
 
-<!-- VIDEO DỌC -->
 <div class="rotate">
   <video autoplay muted loop playsinline>
     <source src="cute.mp4" type="video/mp4">
   </video>
 </div>
 
-<!-- VIDEO NGANG -->
+<div class="main">
+  <video autoplay muted loop playsinline>
+    <source src="BeautyPlus-video-enhancer-preview-1770091865238.jpg.mp4" type="video/mp4">
+  </video>
+
+  <div class="text-box">
+    <div class="wave">
+      <span>H</span><span>A</span><span>P</span><span>P</span><span>Y</span>
+      <span>&nbsp;</span>
+      <span>N</span><span>E</span><span>W</span>
+      <span>&nbsp;</span>
+      <span>Y</span><span>E</span><span>A</span><span>R</span>
+      <span>&nbsp;</span>
+      <span>2</span><span>0</span><span>2</span><span>6</span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="musicBtn" class="btn">☘️ Bật nhạc</button>
+    <button id="continueBtn" class="btn">🧧 Tiếp tục</button>
+  </div>
+</div>
+
+<audio id="bgMusic" src="audio.mp3" loop></audio>
+
+<script>
+const rotate = document.querySelector('.rotate');
+const main = document.querySelector('.main');
+const musicBtn = document.getElementById('musicBtn');
+const continueBtn = document.getElementById('continueBtn');
+const music = document.getElementById('bgMusic');
+
+function checkOrientation(){
+  if(window.innerWidth > window.innerHeight){
+    rotate.style.display = 'none';
+    main.style.display = 'block';
+  }else{
+    rotate.style.display = 'flex';
+    main.style.display = 'none';
+  }
+}
+window.addEventListener('load', checkOrientation);
+window.addEventListener('resize', checkOrientation);
+
+// trạng thái nút
+if(localStorage.getItem('musicStarted') === 'yes'){
+  musicBtn.style.display='none';
+  continueBtn.style.display='block';
+}
+
+musicBtn.onclick = ()=>{
+  music.play();
+  localStorage.setItem('musicStarted','yes');
+  musicBtn.style.display='none';
+  continueBtn.style.display='block';
+};
+
+continueBtn.onclick = ()=>{
+  if(music.paused) music.play();
+};
+</script>
+
+</body>
+</html><!-- VIDEO NGANG -->
 <div class="main">
   <video autoplay muted loop playsinline>
     <source src="BeautyPlus-video-enhancer-preview-1770091865238.jpg.mp4" type="video/mp4">
