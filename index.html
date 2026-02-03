@@ -14,7 +14,7 @@ html,body{
   font-family:Arial, Helvetica, sans-serif;
 }
 
-/* ===== MÀN HÌNH DỌC ===== */
+/* ===== MÀN DỌC ===== */
 .rotate{
   position:fixed;
   inset:0;
@@ -32,7 +32,7 @@ html,body{
   margin-top:20px;
 }
 
-/* ===== TRANG CHÍNH (NGANG) ===== */
+/* ===== MÀN NGANG ===== */
 .main{
   position:fixed;
   inset:0;
@@ -65,7 +65,7 @@ html,body{
 
 <body>
 
-<!-- MÀN HÌNH DỌC -->
+<!-- DỌC -->
 <div class="rotate">
   <div>Vui lòng xoay ngang màn hình</div>
   <video id="rotateVideo" muted playsinline preload="auto">
@@ -73,7 +73,7 @@ html,body{
   </video>
 </div>
 
-<!-- TRANG NGANG -->
+<!-- NGANG -->
 <div class="main">
   <video id="bgVideo" class="bg-video" muted playsinline preload="auto">
     <source src="video_20260202_212905_edit.mp4" type="video/mp4">
@@ -82,30 +82,33 @@ html,body{
 </div>
 
 <script>
-window.addEventListener('load', () => {
-  const bgVideo = document.getElementById('bgVideo');
+function forceInfinite(video){
+  if(!video) return;
 
-  if (!bgVideo) return;
-
-  const playLoop = () => {
-    bgVideo.currentTime = 0;
-    bgVideo.play().catch(()=>{});
+  const play = () => {
+    video.currentTime = 0;
+    video.play().catch(()=>{});
   };
 
   // chạy lần đầu
-  playLoop();
+  play();
 
-  // hết là chạy lại
-  bgVideo.addEventListener('ended', playLoop);
+  // hết → chạy lại
+  video.addEventListener('ended', play);
 
-  // Android hay pause ngầm → ép chạy lại
-  setInterval(() => {
-    if (bgVideo.paused) playLoop();
-  }, 1000);
+  // mobile pause ngầm
+  setInterval(()=>{
+    if(video.paused) play();
+  },1000);
 
-  // cần tương tác người dùng
-  document.body.addEventListener('touchstart', playLoop, { once:true });
-  document.body.addEventListener('click', playLoop, { once:true });
+  // tương tác người dùng
+  document.body.addEventListener('touchstart', play, {once:true});
+  document.body.addEventListener('click', play, {once:true});
+}
+
+window.addEventListener('load',()=>{
+  forceInfinite(document.getElementById('bgVideo'));
+  forceInfinite(document.getElementById('rotateVideo'));
 });
 </script>
 
